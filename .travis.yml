@@ -9,10 +9,6 @@ install:
 # script:
   - python main.py
 
-matrix:
-  allow_failures:
-    python: "3.6"
-
 deploy:
   provider: pages
   skip-cleanup: true
