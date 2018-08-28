@@ -50,10 +50,18 @@ def add_gitlab():
     # See https://gitlab.com/gitlab-com/infrastructure/issues/434
     return "\n## GitLab\nroute 35.231.145.151 255.0.0.0\n"
 
+def add_atlassian():
+    output = "\n### Atlassian\n"
+    r = requests.get("https://ip-ranges.atlassian.com/")
+    for item in r.json()["items"]:
+        output += "route " + item["network"] + " " + item["mask"] + "\n"
+    return output
+    
 
 OUTPUT += add_amazon()
 OUTPUT += add_github()
 OUTPUT += add_gitlab()
+OUTPUT += add_atlassian()
 
 try:
     with open("routes.txt", 'w') as out:
