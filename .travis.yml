@@ -6,7 +6,7 @@ python:
 install:
   - pip install -r requirements.txt
 # command to run tests
-# script:
+script:
   - python main.py
 
 deploy:
