@@ -54,7 +54,6 @@ OUTPUT += add_amazon()
 OUTPUT += add_github()
 OUTPUT += add_gitlab()
 
-print("Routes written to \"routes.txt\"")
 with open("routes.txt", 'w') as out:
     out.write(OUTPUT)
-print("Output written to 'output.txt'")
+print("Output written to 'routes.txt'")
