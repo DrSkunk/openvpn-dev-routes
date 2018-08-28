@@ -2,6 +2,7 @@
 # route 52.124.128.0 255.255.128.0
 # Works with python 2 and 3
 
+import sys
 import json
 import requests
 import ipaddress
@@ -54,6 +55,10 @@ OUTPUT += add_amazon()
 OUTPUT += add_github()
 OUTPUT += add_gitlab()
 
-with open("routes.txt", 'w') as out:
-    out.write(OUTPUT)
-print("Output written to 'routes.txt'")
+try:
+    with open("routes.txt", 'w') as out:
+        out.write(OUTPUT)
+    print("Output written to 'routes.txt'")
+except IOError:
+    print("Error while writing 'routes.txt'")
+    sys.exit(1)
