@@ -45,22 +45,25 @@ def add_amazon():
 
 
 def add_github():
-    print("Fetching GitHub")
-    output = "\n### GitHub\n"
-    r = requests.get("https://api.github.com/meta")
-    json = {k: v for k, v in r.json().items() if isinstance(v, list)}
+    try:
+        print("Fetching GitHub")
+        output = "\n### GitHub\n"
+        r = requests.get("https://api.github.com/meta")
+        json = {k: v for k, v in r.json().items() if isinstance(v, list)}
 
-    if not json.items():
+        if not json.items():
+            raise Exception
+
+        current_group = ""
+        for group, address_list in json.items():
+            if current_group != group:
+                #output += transform_address(address)
+                output += "# " + group + "\n"
+                current_group = group
+            for address in address_list:
+                output += transform_address(address)
+    except:
         raise DataFetchError("Error fetching data from GitHub")
-
-    current_group = ""
-    for group, address_list in json.items():
-        if current_group != group:
-            #output += transform_address(address)
-            output += "# " + group + "\n"
-            current_group = group
-        for address in address_list:
-            output += transform_address(address)
     return output
 
 
